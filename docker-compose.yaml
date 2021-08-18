@@ -1,0 +1,31 @@
+version: '3.0'
+
+services:
+  db:
+    container_name: my-mysql-con
+    build:
+      context: .
+      dockerfile: Dockerfile-mysql
+    image: my-mysql
+    ports:
+      - "3333:3306"
+    volumes:
+      - my-mysql-vol
+    command: --explicit_defaults_for_timestamp
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: replace_with_your_password
+
+  app:
+    container_name: my-app-con
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: my-app
+    links:
+      - my-mysql-con
+    depends_on:
+      - my-mysql-con
+    restart: always
+    ports:
+      - "8888:8080"
