@@ -32,6 +32,4 @@ build/
 ### VS Code ###
 .vscode/
 
-### configuration
-src/main/resources/application.properties
 
