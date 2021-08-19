@@ -11,5 +11,4 @@ RUN sh -c "echo spring.datasource.username=root >> application.properties"
 RUN sh -c "echo spring.datasource.password=replace_with_your_password >> application.properties"
 RUN sh -c "echo server.port=8081 >> application.properties"
 
-# use CMD instead of ENTRYPOINT to make it possible for docker-compose to override this command 
-CMD ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]

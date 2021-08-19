@@ -8,7 +8,7 @@ services:
       dockerfile: Dockerfile-mysql
     image: my-mysql-img
     ports:
-      - "3333:3306"
+      - "3306:3306"
     volumes:
       - my-mysql-vol
     command: --explicit_defaults_for_timestamp
@@ -26,10 +26,10 @@ services:
       - db:db_host
     depends_on:
       - db
-    # use this command to override CMD in Dockerfile, sleeping 5 minutes to wait for independent service db to be ready.
-    command: sleep 5m && java -jar app.jar
+    # use entrypoint syntax to override entrypoint in Dockerfile, sleeping 5 minutes to wait for independent service db to be ready.
+    entrypoint: sh -c "sleep 5m && java -jar app.jar"
     environment:
       SPRING_DATASOURCE.URL: jdbc:mysql://db_host:3306/stock_price?autoReconnect=true&useSSL=false
     restart: always
     ports:
-      - "8088:8081"
+      - "8081:8081"
