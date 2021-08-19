@@ -1,15 +1,10 @@
 pipeline {
-    agent {
-        /*
-            This image parameter downloads the maven:3.8.1-adoptopenjdk-11 Docker image (if it’s not already available on the machine), 
-                and runs this image as a separate container.
-            The Maven container becomes the agent that Jenkins uses to run the Pipeline project. 
-        */ 
-        docker {
-            image 'maven:3.8.1-adoptopenjdk-11' 
-            args '-v /root/.m2:/root/.m2' 
-        } 
+    agent any 
+    
+    tools {
+        maven "M3"
     }
+    
     stages {
         stage('Build') {
             steps {
