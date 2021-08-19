@@ -17,7 +17,7 @@ pipeline {
                 // bat "mvn -Dmaven.test.failure.ignore=true clean package"
 
                 // build the image with docker compose
-                docker-compose build
+                sh "docker-compose build"
             }
         }
         stage('Test') {
