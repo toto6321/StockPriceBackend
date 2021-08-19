@@ -2,7 +2,7 @@ FROM openjdk:11
 
 WORKDIR /app
 
-ADD target/Group777777-0.0.1-SNAPSHOT.jar app.jar
+COPY target/Group777777-0.0.1-SNAPSHOT.jar app.jar
 
 EXPOSE 8081
 
