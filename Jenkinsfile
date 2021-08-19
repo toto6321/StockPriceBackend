@@ -4,7 +4,7 @@ pipeline {
     tools {
         maven "M3"
     }
-    
+
     stages {
         stage('Build') {
             steps {
@@ -14,6 +14,9 @@ pipeline {
 
                 // To run Maven on a Windows agent, use
                 // bat "mvn -Dmaven.test.failure.ignore=true clean package"
+
+                // build the image with docker compose
+                docker-compose build
             }
         }
         stage('Test') {
