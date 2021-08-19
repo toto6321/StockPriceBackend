@@ -1,4 +1,4 @@
-
+USE `stock_market`;
 --
 -- Dumping data for table `company`
 --
