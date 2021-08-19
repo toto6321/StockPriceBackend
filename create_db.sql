@@ -1,5 +1,7 @@
-CREATE DATABASE IF NOT EXISTS `stock_market` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+CREATE DATABASE IF NOT EXISTS `stock_market`; 
+
 USE `stock_market`;
+
 -- MySQL dump 10.13  Distrib 8.0.26, for Win64 (x86_64)
 --
 -- Host: localhost    Database: stock_market
@@ -28,7 +30,6 @@ CREATE TABLE IF NOT EXISTS `stock_price`
     AUTO_INCREMENT = 32768
     DEFAULT CHARSET = utf8mb4
     COLLATE = utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 
 --
