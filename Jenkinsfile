@@ -16,7 +16,7 @@ pipeline {
                 // To run Maven on a Windows agent, use
                 // bat "mvn -Dmaven.test.failure.ignore=true clean package"
 
-                // build the image with docker compose
+                // build the images with docker compose
                 sh "docker-compose build"
             }
         }
@@ -32,7 +32,7 @@ pipeline {
         }
         stage('Deliver') { 
             steps {
-                sh './jenkins/scripts/deliver.sh' 
+                sh './deliver.sh' 
             }
         }
     }
