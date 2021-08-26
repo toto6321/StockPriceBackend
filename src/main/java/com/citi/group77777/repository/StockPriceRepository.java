@@ -4,6 +4,7 @@ import com.citi.group77777.dto.StockPriceGroupBySymbolwithAvg;
 import com.citi.group77777.model.StockPrice;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
@@ -13,12 +14,10 @@ import java.util.Optional;
 @Repository
 public interface StockPriceRepository extends JpaRepository<StockPrice, Long> {
 
-    @Query(value = "select * from stock_market.stock_price where symbol = ?1 and date = ?2", nativeQuery = true)
-    Optional<StockPrice> findBySymbolAndDate(String symbol, LocalDate date);
+    @Query(value = "select * from `stock_price` where `symbol` = :symbol and `date` between :begin and :end ;", nativeQuery = true)
+    List<StockPrice> findBySymbolAndDateRange(@Param("symbol") String symbol, @Param("begin") LocalDate begin, @Param("end") LocalDate end);
 
-    @Query(value = "select * from stock_price limit ?2 offset ?1 ", nativeQuery = true)
-    List<StockPrice> getPage(int offset, int limit);
+    @Query(value = "select * from `stock_price` limit :limit offset :offset ;", nativeQuery = true)
+    List<StockPrice> getPage(@Param("limit") int limit, @Param("offset") int offset);
 
-    @Query(value = "select symbol, avg(open), avg(high), avg(low), avg(close), avg(volume) from stock_price group by symbol; ", nativeQuery = true)
-    List<StockPriceGroupBySymbolwithAvg> getAVG();
 }

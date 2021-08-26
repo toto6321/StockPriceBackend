@@ -6,11 +6,12 @@ import com.citi.group77777.exception.StockPriceExceptionSymbolAndDateExisted;
 import com.citi.group77777.model.StockPrice;
 import com.citi.group77777.service.StockPriceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
+@Configuration
 @RestController
 @RequestMapping("/api/v1/stockprice")
 public class StockPriceController {
@@ -20,11 +21,6 @@ public class StockPriceController {
     @Autowired
     public StockPriceController(StockPriceService service) {
         this.service = service;
-    }
-
-    @GetMapping("/all")
-    public List<StockPrice> getAll() {
-        return service.getAll();
     }
 
     @GetMapping()
@@ -68,11 +64,6 @@ public class StockPriceController {
         } catch (StockPriceExceptionNotFound e) {
             return e.message;
         }
-    }
-
-    @GetMapping("/avg")
-    public List<StockPriceGroupBySymbolwithAvg> getAVG() {
-        return service.getAVG();
     }
 
 }
