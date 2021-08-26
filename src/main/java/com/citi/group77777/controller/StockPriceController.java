@@ -71,9 +71,4 @@ public class StockPriceController {
         }
     }
 
-    @GetMapping("/avg")
-    public List<StockPriceGroupBySymbolwithAvg> getAVG() {
-        return service.getAVG();
-    }
-
 }

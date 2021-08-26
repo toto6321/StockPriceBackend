@@ -47,8 +47,8 @@ public class StockPriceService {
     }
 
     public void addOne(StockPrice one) throws StockPriceExceptionSymbolAndDateExisted {
-        Optional<StockPrice> con1 = repository.findBySymbolAndDate(one.getSymbol(), one.getDate());
-        if (con1.isPresent()) {
+        List<StockPrice> con1 = repository.findBySymbolAndDateRange(one.getSymbol(), one.getDate(), one.getDate());
+        if (!con1.isEmpty()) {
             throw new StockPriceExceptionSymbolAndDateExisted(one.getSymbol(), one.getDate());
         }
         repository.saveAndFlush(one);
@@ -88,8 +88,5 @@ public class StockPriceService {
     public List<StockPrice> getPage(int pageSize, int page) {
         return repository.getPage(pageSize*(page-1), pageSize);
     }
-
-    public List<StockPriceGroupBySymbolwithAvg> getAVG() {
-        return repository.getAVG();
-    }
+    
 }
