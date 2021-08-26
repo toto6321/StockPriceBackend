@@ -96,4 +96,8 @@ public class StockIndexService {
     public List<StockIndex> getBySymbolAndDateRange(String symbol, LocalDate begin, LocalDate end) {
         return repository.getBySymbolAndDateRange(symbol, begin, end);
     }
+
+    public List<StockIndex> getAllWithinPeriod(LocalDate begin, LocalDate end) {
+        return repository.getAllWithinPeriod(begin, end);
+    }
 }
