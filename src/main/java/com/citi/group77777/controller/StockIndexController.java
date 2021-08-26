@@ -3,11 +3,17 @@ package com.citi.group77777.controller;
 import com.citi.group77777.exception.StockIndexExceptionNotFound;
 import com.citi.group77777.exception.StockIndexExceptionSymbolAndDateExisted;
 import com.citi.group77777.model.StockIndex;
+import com.citi.group77777.model.StockPrice;
 import com.citi.group77777.service.StockIndexService;
+import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.text.DateFormatter;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 
 @CrossOrigin
@@ -63,5 +69,31 @@ public class StockIndexController {
         } catch (StockIndexExceptionNotFound e) {
             return e.message;
         }
+    }
+
+    @GetMapping("/symbol/{symbol}")
+    public List<StockIndex> getBySymbol(
+            @PathVariable("symbol") String symbol,
+            @RequestParam(value = "begin", defaultValue = "") final String begin,
+            @RequestParam(value = "end", defaultValue = "") final String end
+    ) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate be = LocalDate.EPOCH;
+        LocalDate en = LocalDate.now();
+        if (end.length() > 0) {
+            try {
+                en = (LocalDate) formatter.parse(end);
+            } catch (DateTimeParseException e) {
+
+            }
+        }
+        if (begin.length() > 0) {
+            try {
+                be = (LocalDate) formatter.parse(begin);
+            } catch (DateTimeParseException e) {
+
+            }
+        }
+        return service.getBySymbolAndDateRange(symbol, be, en);
     }
 }

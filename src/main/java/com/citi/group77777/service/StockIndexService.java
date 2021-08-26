@@ -3,11 +3,13 @@ package com.citi.group77777.service;
 import com.citi.group77777.exception.StockIndexExceptionNotFound;
 import com.citi.group77777.exception.StockIndexExceptionSymbolAndDateExisted;
 import com.citi.group77777.model.StockIndex;
+import com.citi.group77777.model.StockPrice;
 import com.citi.group77777.repository.StockIndexRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,7 +48,7 @@ public class StockIndexService {
     }
 
     public void addOne(StockIndex one) throws StockIndexExceptionSymbolAndDateExisted {
-        List<StockIndex> con1 = repository.findBySymbolAndDateRange(one.getSymbol(), one.getDate(), one.getDate());
+        List<StockIndex> con1 = repository.getBySymbolAndDateRange(one.getSymbol(), one.getDate(), one.getDate());
         if (!con1.isEmpty()) {
             throw new StockIndexExceptionSymbolAndDateExisted(one.getSymbol(), one.getDate());
         }
@@ -88,4 +90,11 @@ public class StockIndexService {
         return repository.getPage(pageSize, pageSize * (page - 1));
     }
 
+    public List<StockIndex> getBySymbol(String symbol) {
+        return repository.getBySymbol(symbol);
+    }
+
+    public List<StockIndex> getBySymbolAndDateRange(String symbol, LocalDate begin, LocalDate end) {
+        return repository.getBySymbolAndDateRange(symbol, begin, end);
+    }
 }
