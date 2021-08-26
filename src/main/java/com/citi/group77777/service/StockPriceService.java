@@ -86,7 +86,7 @@ public class StockPriceService {
     }
 
     public List<StockPrice> getPage(int pageSize, int page) {
-        return repository.getPage(pageSize*(page-1), pageSize);
+        return repository.getPage(pageSize, pageSize*(page - 1));
     }
-    
+
 }

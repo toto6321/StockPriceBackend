@@ -85,7 +85,7 @@ public class StockIndexService {
     }
 
     public List<StockIndex> getPage(int pageSize, int page) {
-        return repository.getPage(pageSize * (page - 1), pageSize);
+        return repository.getPage(pageSize, pageSize * (page - 1));
     }
 
 }
