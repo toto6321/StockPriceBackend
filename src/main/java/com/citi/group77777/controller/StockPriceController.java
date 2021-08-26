@@ -23,11 +23,6 @@ public class StockPriceController {
         this.service = service;
     }
 
-    @GetMapping("/all")
-    public List<StockPrice> getAll() {
-        return service.getAll();
-    }
-
     @GetMapping()
     public List<StockPrice> getPage(@RequestParam int pageSize, @RequestParam int page) {
         return service.getPage(pageSize, page);

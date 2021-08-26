@@ -22,11 +22,6 @@ public class StockIndexController {
         this.service = service;
     }
 
-    @GetMapping("/all")
-    public List<StockIndex> getAll() {
-        return service.getAll();
-    }
-
     @GetMapping()
     public List<StockIndex> getPage(@RequestParam int pageSize, @RequestParam int page) {
         return service.getPage(pageSize, page);
