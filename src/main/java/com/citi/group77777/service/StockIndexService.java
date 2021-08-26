@@ -3,7 +3,6 @@ package com.citi.group77777.service;
 import com.citi.group77777.exception.StockIndexExceptionNotFound;
 import com.citi.group77777.exception.StockIndexExceptionSymbolAndDateExisted;
 import com.citi.group77777.model.StockIndex;
-import com.citi.group77777.model.StockPrice;
 import com.citi.group77777.repository.StockIndexRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

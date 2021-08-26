@@ -1,12 +1,9 @@
 package com.citi.group77777.controller;
 
-import com.citi.group77777.dto.StockPriceGroupBySymbolwithAvg;
 import com.citi.group77777.exception.StockPriceExceptionNotFound;
 import com.citi.group77777.exception.StockPriceExceptionSymbolAndDateExisted;
-import com.citi.group77777.model.StockIndex;
 import com.citi.group77777.model.StockPrice;
 import com.citi.group77777.service.StockPriceService;
-import org.hibernate.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.*;
@@ -84,14 +81,14 @@ public class StockPriceController {
             try {
                 en = (LocalDate) formatter.parse(end);
             } catch (DateTimeParseException e) {
-                System.out.println(e);
+                System.out.println(e.getMessage());
             }
         }
         if (begin.length() > 0) {
             try {
                 be = (LocalDate) formatter.parse(begin);
             } catch (DateTimeParseException e) {
-                System.out.println(e);
+                System.out.println(e.getMessage());
             }
         }
         return service.getBySymbolAndDateRange(symbol, be, en);

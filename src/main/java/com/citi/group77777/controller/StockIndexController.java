@@ -3,14 +3,10 @@ package com.citi.group77777.controller;
 import com.citi.group77777.exception.StockIndexExceptionNotFound;
 import com.citi.group77777.exception.StockIndexExceptionSymbolAndDateExisted;
 import com.citi.group77777.model.StockIndex;
-import com.citi.group77777.model.StockPrice;
 import com.citi.group77777.service.StockIndexService;
-import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.*;
 
-import javax.swing.text.DateFormatter;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -84,14 +80,14 @@ public class StockIndexController {
             try {
                 en = (LocalDate) formatter.parse(end);
             } catch (DateTimeParseException e) {
-
+                System.out.println(e.getMessage());
             }
         }
         if (begin.length() > 0) {
             try {
                 be = (LocalDate) formatter.parse(begin);
             } catch (DateTimeParseException e) {
-
+                System.out.println(e.getMessage());
             }
         }
         return service.getBySymbolAndDateRange(symbol, be, en);

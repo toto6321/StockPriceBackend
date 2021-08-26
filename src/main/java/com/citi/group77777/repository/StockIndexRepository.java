@@ -1,7 +1,6 @@
 package com.citi.group77777.repository;
 
 import com.citi.group77777.model.StockIndex;
-import com.citi.group77777.model.StockPrice;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

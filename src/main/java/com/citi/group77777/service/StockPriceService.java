@@ -1,6 +1,5 @@
 package com.citi.group77777.service;
 
-import com.citi.group77777.dto.StockPriceGroupBySymbolwithAvg;
 import com.citi.group77777.exception.StockPriceExceptionNotFound;
 import com.citi.group77777.exception.StockPriceExceptionSymbolAndDateExisted;
 import com.citi.group77777.model.StockPrice;
@@ -87,7 +86,7 @@ public class StockPriceService {
     }
 
     public List<StockPrice> getPage(int pageSize, int page) {
-        return repository.getPage(pageSize, pageSize*(page - 1));
+        return repository.getPage(pageSize, pageSize * (page - 1));
     }
 
     public List<StockPrice> getBySymbol(String symbol) {
