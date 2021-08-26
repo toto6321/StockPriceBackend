@@ -86,6 +86,6 @@ public class CompanyService {
     }
 
     public List<Company> getByName(String name) {
-        return repository.getByISIN(name);
+        return repository.getByName(name);
     }
 }
