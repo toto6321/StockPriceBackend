@@ -78,14 +78,14 @@ public class StockIndexController {
         LocalDate en = LocalDate.now();
         if (end.length() > 0) {
             try {
-                en = (LocalDate) formatter.parse(end);
+                en = LocalDate.parse(end, formatter);
             } catch (DateTimeParseException e) {
                 System.out.println(e.getMessage());
             }
         }
         if (begin.length() > 0) {
             try {
-                be = (LocalDate) formatter.parse(begin);
+                be = LocalDate.parse(begin, formatter);
             } catch (DateTimeParseException e) {
                 System.out.println(e.getMessage());
             }
