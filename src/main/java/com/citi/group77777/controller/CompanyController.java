@@ -7,6 +7,7 @@ import com.citi.group77777.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -62,6 +63,25 @@ public class CompanyController {
         } catch (CompanyExceptionNotFound e) {
             return e.message;
         }
+    }
+
+    @GetMapping("/search")
+    public List<Company> search(
+            @RequestParam(value = "symbol", defaultValue = "") String symbol,
+            @RequestParam(value = "isin", defaultValue = "") String isin,
+            @RequestParam(value = "name", defaultValue = "") String name
+    ) {
+        List<Company> resultSet = new ArrayList<Company>();
+        if (isin.length() > 0) {
+            resultSet.addAll(service.getByISIN(isin));
+        }
+        if (symbol.length() > 0) {
+            resultSet.addAll(service.getBySymbol(symbol));
+        }
+        if (name.length() > 0) {
+            resultSet.addAll(service.getByName(name));
+        }
+        return resultSet;
     }
 
 }

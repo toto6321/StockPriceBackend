@@ -42,14 +42,10 @@ public class CompanyService {
     }
 
     public void addOne(Company one) throws CompanyExceptionSymbolExisted {
-        Optional<Company> con1 = repository.findBySymbol(one.getSymbol());
-//        Optional<Company> con2 = repository.findByISIN(one.getIsin());
-        if (con1.isPresent()) {
+        List<Company> con1 = repository.getBySymbol(one.getSymbol());
+        if (con1.isEmpty()) {
             throw new CompanyExceptionSymbolExisted(one.getSymbol());
         }
-//        if (con2.isPresent()) {
-//            throw new CompanyExceptionFound(con2.getId());
-//        }
         repository.saveAndFlush(one);
 
     }
@@ -79,5 +75,17 @@ public class CompanyService {
         if (one.getSeries().length() > 0) {
             o.setSeries(one.getSeries());
         }
+    }
+
+    public List<Company> getBySymbol(String symbol) {
+        return repository.getBySymbol(symbol);
+    }
+
+    public List<Company> getByISIN(String isin) {
+        return repository.getByISIN(isin);
+    }
+
+    public List<Company> getByName(String name) {
+        return repository.getByISIN(name);
     }
 }
