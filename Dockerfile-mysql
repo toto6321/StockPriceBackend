@@ -5,9 +5,6 @@ EXPOSE 3306
 ENV MYSQL_ROOT_PASSWORD=replace_with_your_password
 
 COPY create_db.sql /docker-entrypoint-initdb.d
-COPY insert_data.sql /docker-entrypoint-initdb.d
-
-
-
-
-
+COPY insert_company.sql /docker-entrypoint-initdb.d
+COPY insert_stock_price.sql /docker-entrypoint-initdb.d
+COPY insert_stock_index.sql /docker-entrypoint-initdb.d
