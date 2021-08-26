@@ -14,14 +14,13 @@ pipeline {
 
                 // To run Maven on a Windows agent, use
                 // bat "mvn -Dmaven.test.failure.ignore=true clean package"
-
                 // build the images with docker compose
                 sh "docker-compose build"
             }
         }
         stage('Test') {
             steps {
-                sh 'mvn test'
+                // sh 'mvn test'
             }
             post {
                 always {
