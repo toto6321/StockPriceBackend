@@ -1,9 +1,9 @@
 package com.citi.group77777.controller;
 
-import com.citi.group77777.exception.CompanyExceptionNotFound;
-import com.citi.group77777.exception.CompanyExceptionSymbolExisted;
-import com.citi.group77777.model.Company;
-import com.citi.group77777.service.CompanyService;
+import com.citi.group77777.exception.ExchangeExceptionNotFound;
+import com.citi.group77777.exception.ExchangeExceptionSymbolExisted;
+import com.citi.group77777.model.Exchange;
+import com.citi.group77777.service.ExchangeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,22 +13,22 @@ import java.util.Optional;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/v1/company")
-public class CompanyController {
-    private final CompanyService service;
+@RequestMapping("/api/v1/exchange")
+public class ExchangeController {
+    private final ExchangeService service;
 
     @Autowired
-    public CompanyController(CompanyService service) {
+    public ExchangeController(ExchangeService service) {
         this.service = service;
     }
 
     @GetMapping("/all")
-    public List<Company> getAll() {
+    public List<Exchange> getAll() {
         return service.getAll();
     }
 
     @GetMapping("/{id}")
-    public Optional<Company> getById(@PathVariable int id) {
+    public Optional<Exchange> getById(@PathVariable int id) {
         return service.findById(id);
     }
 
@@ -37,17 +37,17 @@ public class CompanyController {
         try {
             service.deleteById(id);
             return "Successfully Deleted.";
-        } catch (CompanyExceptionNotFound e) {
+        } catch (ExchangeExceptionNotFound e) {
             return e.getMessage();
         }
     }
 
     @PostMapping("")
-    public String createOne(@RequestBody Company one) {
+    public String createOne(@RequestBody Exchange one) {
         try {
             service.addOne(one);
             return "Successfully Created.";
-        } catch (CompanyExceptionSymbolExisted e) {
+        } catch (ExchangeExceptionSymbolExisted e) {
             return e.message;
         }
     }
@@ -55,26 +55,22 @@ public class CompanyController {
     @PutMapping("/{id}")
     public String updateOne(
             @PathVariable long id,
-            @RequestBody Company one
+            @RequestBody Exchange one
     ) {
         try {
             service.updateOne(id, one);
             return "Successfully Updated.";
-        } catch (CompanyExceptionNotFound e) {
+        } catch (ExchangeExceptionNotFound e) {
             return e.message;
         }
     }
 
     @GetMapping("/search")
-    public List<Company> search(
+    public List<Exchange> search(
             @RequestParam(value = "symbol", defaultValue = "") String symbol,
-            @RequestParam(value = "isin", defaultValue = "") String isin,
             @RequestParam(value = "name", defaultValue = "") String name
     ) {
-        List<Company> resultSet = new ArrayList<Company>();
-        if (isin.length() > 0) {
-            resultSet.addAll(service.getByISIN(isin));
-        }
+        List<Exchange> resultSet = new ArrayList<Exchange>();
         if (symbol.length() > 0) {
             resultSet.addAll(service.getBySymbol(symbol));
         }

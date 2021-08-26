@@ -1,6 +1,5 @@
 package com.citi.group77777.controller;
 
-import com.citi.group77777.dto.StockPriceGroupBySymbolwithAvg;
 import com.citi.group77777.exception.StockPriceExceptionNotFound;
 import com.citi.group77777.exception.StockPriceExceptionSymbolAndDateExisted;
 import com.citi.group77777.model.StockPrice;
@@ -9,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 
 @Configuration
@@ -64,6 +66,32 @@ public class StockPriceController {
         } catch (StockPriceExceptionNotFound e) {
             return e.message;
         }
+    }
+
+    @GetMapping("/symbol/{symbol}")
+    public List<StockPrice> getBySymbol(
+            @PathVariable("symbol") String symbol,
+            @RequestParam(value = "begin", defaultValue = "") final String begin,
+            @RequestParam(value = "end", defaultValue = "") final String end
+    ) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate be = LocalDate.EPOCH;
+        LocalDate en = LocalDate.now();
+        if (end.length() > 0) {
+            try {
+                en = LocalDate.parse(end, formatter);
+            } catch (DateTimeParseException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        if (begin.length() > 0) {
+            try {
+                be = LocalDate.parse(begin, formatter);
+            } catch (DateTimeParseException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        return service.getBySymbolAndDateRange(symbol, be, en);
     }
 
 }

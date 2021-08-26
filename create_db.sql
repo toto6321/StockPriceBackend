@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS `stock_price`
     `high`   double       NOT NULL,
     `low`    double       NOT NULL,
     `close`  double       NOT NULL,
-    `volume` bigint          NOT NULL,
+    `volume` bigint       NOT NULL,
     PRIMARY KEY (`id`)
     ) ENGINE = InnoDB
     AUTO_INCREMENT = 1
@@ -68,7 +68,27 @@ CREATE TABLE IF NOT EXISTS `stock_index`
     `high`   double       NOT NULL,
     `low`    double       NOT NULL,
     `close`  double       NOT NULL,
-    `volume` bigint          NOT NULL,
+    `volume` bigint       NOT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_0900_ai_ci;
+
+
+--
+-- Table structure for table `stock_index_info`
+--
+
+-- DROP TABLE IF EXISTS `stock_index_info`;
+
+CREATE TABLE IF NOT EXISTS `exchange`
+(
+    `id`        bigint       NOT NULL AUTO_INCREMENT,
+    `symbol`    varchar(255) NOT NULL,
+    `name`      varchar(255) NOT NULL,
+    `region`    varchar(255) NOT NULL,
+    `currency`  varchar(255) NOT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 1

@@ -8,3 +8,4 @@ COPY create_db.sql /docker-entrypoint-initdb.d
 COPY insert_company.sql /docker-entrypoint-initdb.d
 COPY insert_stock_price.sql /docker-entrypoint-initdb.d
 COPY insert_stock_index.sql /docker-entrypoint-initdb.d
+COPY insert_exchange.sql /docker-entrypoint-initdb.d

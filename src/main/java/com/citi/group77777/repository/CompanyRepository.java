@@ -6,13 +6,17 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import java.util.Optional;
+import java.util.List;
 
 public interface CompanyRepository extends JpaRepository<Company, Long> {
 
-    @Query(value = "select * from `company` where `isin` = :isin ;", nativeQuery = true)
-    Optional<Company> findByISIN(@Param("isin") String isin);
+    @Query(value = "select * from `company` where `isin` like concat('%',:isin,'%')", nativeQuery = true)
+    List<Company> getByISIN(@Param("isin") String isin);
 
-    @Query(value = "select * from `company` where `symbol` = :symbol ;", nativeQuery = true)
-    Optional<Company> findBySymbol(@Param("symbol") String symbol);
+    @Query(value = "select * from `company` where `symbol` like concat('%',:symbol,'%') ;", nativeQuery = true)
+    List<Company> getBySymbol(@Param("symbol") String symbol);
+
+    @Query(value = "select * from `company` where `name` like concat('%',:name,'%') ;", nativeQuery = true)
+    List<Company> getByName(@Param("name") String name);
+
 }

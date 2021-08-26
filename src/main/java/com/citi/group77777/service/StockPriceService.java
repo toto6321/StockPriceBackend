@@ -1,6 +1,5 @@
 package com.citi.group77777.service;
 
-import com.citi.group77777.dto.StockPriceGroupBySymbolwithAvg;
 import com.citi.group77777.exception.StockPriceExceptionNotFound;
 import com.citi.group77777.exception.StockPriceExceptionSymbolAndDateExisted;
 import com.citi.group77777.model.StockPrice;
@@ -9,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,7 +47,7 @@ public class StockPriceService {
     }
 
     public void addOne(StockPrice one) throws StockPriceExceptionSymbolAndDateExisted {
-        List<StockPrice> con1 = repository.findBySymbolAndDateRange(one.getSymbol(), one.getDate(), one.getDate());
+        List<StockPrice> con1 = repository.getBySymbolAndDateRange(one.getSymbol(), one.getDate(), one.getDate());
         if (!con1.isEmpty()) {
             throw new StockPriceExceptionSymbolAndDateExisted(one.getSymbol(), one.getDate());
         }
@@ -86,7 +86,15 @@ public class StockPriceService {
     }
 
     public List<StockPrice> getPage(int pageSize, int page) {
-        return repository.getPage(pageSize, pageSize*(page - 1));
+        return repository.getPage(pageSize, pageSize * (page - 1));
+    }
+
+    public List<StockPrice> getBySymbol(String symbol) {
+        return repository.getBySymbol(symbol);
+    }
+
+    public List<StockPrice> getBySymbolAndDateRange(String symbol, LocalDate begin, LocalDate end) {
+        return repository.getBySymbolAndDateRange(symbol, begin, end);
     }
 
 }

@@ -1,17 +1,17 @@
 package com.citi.group77777.dto;
 
 public class StockPriceGroupBySymbolwithAvg {
-    private String symbol;
+    private final String symbol;
 
-    private double open;
+    private final double open;
 
-    private double high;
+    private final double high;
 
-    private double low;
+    private final double low;
 
-    private double close;
+    private final double close;
 
-    private int volume;
+    private final int volume;
 
     public StockPriceGroupBySymbolwithAvg(String symbol, double open, double high, double low, double close, int volume) {
         this.symbol = symbol;
