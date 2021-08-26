@@ -4,4 +4,4 @@
 docker-compose down
 
 # start up the new one
-docker-compose up
+docker-compose up -d
