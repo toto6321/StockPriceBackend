@@ -22,5 +22,5 @@ public interface StockIndexRepository extends JpaRepository<StockIndex, Long> {
     List<StockIndex> getPage(@Param("limit") int limit, @Param("offset") int offset);
 
     @Query(value = "select * from `stock_index` where `date` between :begin and :end order by `symbol`, `date` ;", nativeQuery = true)
-    List<StockIndex> getAllWithinPeriod(@Param("begin") LocalDate begin, @Param("end")LocalDate end);
+    List<StockIndex> getAllWithinPeriod(@Param("begin") LocalDate begin, @Param("end") LocalDate end);
 }
