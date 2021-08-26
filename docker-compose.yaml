@@ -26,7 +26,8 @@ services:
       - db:db_host
     depends_on:
       - db
-    # use entrypoint syntax to override entrypoint in Dockerfile, sleeping 5 minutes to wait for independent service db to be ready.
+    # use entrypoint syntax to override entrypoint in Dockerfile, 
+    # sleeping 5 minutes to wait for independent service db to be ready.
     entrypoint: sh -c "sleep 5m && java -jar app.jar"
     environment:
       SPRING_DATASOURCE.URL: jdbc:mysql://db_host:3306/stock_price?autoReconnect=true&useSSL=false
