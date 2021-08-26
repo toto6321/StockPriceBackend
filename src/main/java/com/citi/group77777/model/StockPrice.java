@@ -34,7 +34,7 @@ public class StockPrice {
     private double close;
 
     @Column(nullable = false)
-    private int volume;
+    private long volume;
 
     public StockPrice() {
         this.date = LocalDate.now();
@@ -112,7 +112,7 @@ public class StockPrice {
         this.close = close;
     }
 
-    public int getVolume() {
+    public long getVolume() {
         return volume;
     }
 
