@@ -116,7 +116,7 @@ public class StockIndex {
         return volume;
     }
 
-    public void setVolume(int volume) {
+    public void setVolume(long volume) {
         this.volume = volume;
     }
 }
