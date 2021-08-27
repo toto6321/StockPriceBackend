@@ -1,11 +1,13 @@
 package com.citi.group77777.controller;
 
 import org.springframework.boot.web.servlet.error.ErrorController;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 
+@CrossOrigin
 @RestController
 public class MyErrorController implements ErrorController {
 
