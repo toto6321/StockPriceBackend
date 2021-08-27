@@ -13,7 +13,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 
-@Configuration
+@CrossOrigin
 @RestController
 @RequestMapping("/api/v1/stockprice")
 public class StockPriceController {
